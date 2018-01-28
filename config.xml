@@ -17,10 +17,22 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <icon density="ldpi" src="res/icon/android/ldpi.png" />
+        <icon density="mdpi" src="res/icon/android/mdpi.png" />
+        <icon density="hdpi" src="res/icon/android/hdpi.png" />
+        <icon density="xhdpi" src="res/icon/android/xhdpi.png" />
+        <icon density="xxhdpi" src="res/icon/android/xxhdpi.png" />
+        <icon density="xxxhdpi" src="res/icon/android/xxxhdpi.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <icon density="ldpi" src="res/icon/ios/ldpi.png" />
+        <icon density="mdpi" src="res/icon/ios/mdpi.png" />
+        <icon density="hdpi" src="res/icon/ios/hdpi.png" />
+        <icon density="xhdpi" src="res/icon/ios/xhdpi.png" />
+        <icon density="xxhdpi" src="res/icon/ios/xxhdpi.png" />
+        <icon density="xxxhdpi" src="res/icon/ios/xxxhdpi.png" />
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <engine name="android" spec="^7.0.0" />
