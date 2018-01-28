@@ -4,12 +4,12 @@ help:
 
 install:
 	npm install
-	make setup
+	make res
 
 update:
 	npm update
 
-setup:
+res:
 	node --use_strict ./node_modules/cordova-icon-generator/index.js --source "res/icon.png" --output "res/icon" -r
 
 start:
@@ -21,6 +21,8 @@ start:
 	export J2REDIR=/usr/lib/jvm/java-8-openjdk-amd64
 	export DERBY_HOME=/usr/lib/jvm/java-8-openjdk-amd64/db
 	export ORG_GRADLE_PROJECT_cdvMinSdkVersion=20
+	make setup-device
+	make test
 
 public:
 	cordova serve 8888
@@ -41,5 +43,9 @@ build:
 
 run:
 	cordova run --device
+
+deploy:
+	cordova run --device
+
 # --buildConfig
 #cordova run android --release -- --keystore=../my-release-key.keystore --storePassword=password --alias=alias_name --password=password
