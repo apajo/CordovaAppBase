@@ -1,18 +1,28 @@
+.PHONY: vars start webr install setup public
+
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  device	Connect the device"
 
 install:
+#	npm cache clean
 	npm install
-	make res
+	make webr
 
 update:
 	npm update
 
-res:
-	node --use_strict ./node_modules/cordova-icon-generator/index.js --source "res/icon.png" --output "res/icon" -r
+webr:
+	php -q ./src/cmd/webr.php
+#	node --use_strict ./node_modules/cordova-icon-generator/index.js --source "res/icon.png" --output "res/icon" -r
+#	node /home/andres/Desktop/cordova/YTRC/ytrc/src/cmd/webr.js
 
 start:
+	make vars
+	make setup-device
+	make test
+
+vars:
 	export ANDROID_HOME=/Development/android-sdk/
 	export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/lib/jvm/java-8-openjdk-amd64/db/bin
 	export PATH=${PATH}:/home/andres/Android/Sdk/platform-tools:/home/andres/Android/Sdk/tools
@@ -20,9 +30,8 @@ start:
 	export J2SDKDIR=/usr/lib/jvm/java-8-openjdk-amd64
 	export J2REDIR=/usr/lib/jvm/java-8-openjdk-amd64
 	export DERBY_HOME=/usr/lib/jvm/java-8-openjdk-amd64/db
-	export ORG_GRADLE_PROJECT_cdvMinSdkVersion=20
-	make setup-device
-	make test
+	export ORG_GRADLE_PROJECT_cdvMinSdkVersion=16
+
 
 public:
 	cordova serve 8888

@@ -1,0 +1,4 @@
+#video-selector {display: fixed;}
+
+.modal .modal-full {width: 90vw; max-width: 90vw;}
+.modal iframe {width: 100%; height: 100%; }

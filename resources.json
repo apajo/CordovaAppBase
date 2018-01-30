@@ -1,0 +1,57 @@
+{
+    "src" : {
+        "js":["js/*.js"],
+        "css" : [
+            "css/index.css",
+            "css/*.css"
+        ]
+    },
+    "custom" : {
+        "js":["custom/*.js"],
+        "css" : ["custom/*.css"]
+    },
+    "core" : {
+        "js":[
+            "js/core/app.js",
+            "js/core/core.js",
+            "js/core/utils.js",
+            "js/core/config.js",
+            "js/plugins/template.js",
+            "js/plugins/loader.js",
+            "js/plugins/mode.js",
+            "js/plugins/ajax.js",
+            "js/core/main.js",
+            "js/plugins/ajax.js",
+            "js/plugins/autostart.js",
+            "js/plugins/background.js",
+            "js/plugins/dialogs.js",
+            "js/plugins/notifications.js",
+            "js/plugins/version.js",
+            "js/plugins/*.js"
+        ],
+        "css" : []
+    },
+    "jquery" : {
+        "js" : ["jquery/dist/jquery.min.js"],
+        "css" : []
+    },
+    "bootstrap" : {
+        "js" : [
+            "bootstrap/dist/js/bootstrap.min.js",
+            "bootstrap-slider/dist/bootstrap-slider.min.js"
+        ],
+        "css" : [
+            "bootstrap/dist/css/bootstrap.min.css",
+            "bootstrap-slider/dist/css/bootstrap-slider.min.css",
+            "custom/cyborg4.css"
+        ]
+    },
+    "font-awesome" : {
+        "js" : [],
+        "css" : ["font-awesome/css/font-awesome.min.css"]
+    },
+    "handlebars" : {
+        "js" : ["handlebars/dist/handlebars.min.js"],
+        "css" : []
+    }
+}

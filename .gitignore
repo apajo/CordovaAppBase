@@ -3,3 +3,7 @@
 /platforms
 /res
 /build.json
+/nbproject/private/
+/nbproject/
+/npm-debug.log
+/tmp
