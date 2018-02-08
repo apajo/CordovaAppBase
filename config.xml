@@ -7,7 +7,7 @@
     <author email="andres@apajo.ee" href="http://www.apajo.ee/">
         Andres Pajo
     </author>
-    <content src="index.html" />
+    <content src="html/index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -23,9 +23,9 @@
         <icon density="xhdpi" src="res/icon/android/xhdpi.png" />
         <icon density="xxhdpi" src="res/icon/android/xxhdpi.png" />
         <icon density="xxxhdpi" src="res/icon/android/xxxhdpi.png" />
-        <config-file parent="/*" target="AndroidManifest.xml">
-            <uses-permission android:name="org.apache.cordova.AccelListener" />
-        </config-file>
+        <feature name="Accelerometer">
+            <param name="android-package" value="org.apache.cordova.devicemotion.AccelListener" />
+        </feature>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -37,15 +37,11 @@
         <icon density="xxhdpi" src="res/icon/ios/xxhdpi.png" />
         <icon density="xxxhdpi" src="res/icon/ios/xxxhdpi.png" />
     </platform>
-    <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
-    <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
-    <plugin name="cordova-plugin-autostart" spec="https://github.com/ToniKorin/cordova-plugin-autostart.git" />
-    <plugin name="cordova-plugin-device-motion" spec="~1.2.3" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="Fullscreen" value="true" />
     <preference name="BackgroundColor" value="000" />
     <preference name="HideKeyboardFormAccessoryBar" value="true" />
-    <preference name="Orientation" value="landscape" />
+    <preference name="Orientation" value="default" />
     <preference name="AndroidLaunchMode" value="singleTask" />
     <preference name="android-targetSdkVersion" value="23" />
     <preference name="android-minSdkVersion" value="16" />
@@ -53,5 +49,8 @@
     <preference name="FullScreen" value="true" />
     <preference name="KeepRunning" value="true" />
     <preference name="ShowTitle" value="false" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
+    <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
+    <plugin name="cordova-plugin-autostart" spec="git+https://github.com/ToniKorin/cordova-plugin-autostart.git" />
     <engine name="android" spec="^7.0.0" />
 </widget>

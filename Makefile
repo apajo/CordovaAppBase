@@ -6,14 +6,18 @@ help:
 
 install:
 #	npm cache clean
-	npm install
+	npm install -D
 	make webr
+#	./build/gradle wrapper
 
 update:
 	npm update
 
 webr:
-	php -q ./src/cmd/webr.php
+#	node build
+#	npm run build:theme
+	npm run build:src
+#	php -q ./src/cmd/webr.php
 #	node --use_strict ./node_modules/cordova-icon-generator/index.js --source "res/icon.png" --output "res/icon" -r
 #	node /home/andres/Desktop/cordova/YTRC/ytrc/src/cmd/webr.js
 
@@ -39,6 +43,8 @@ public:
 device:
 	adb devices
 	adb connect 192.168.0.15\:5555
+#	adb connect 192.168.1.132\:5555
+#	adb connect 192.168.1.132\:5555
 
 setup-device:
 	adb tcpip 5555
@@ -48,10 +54,12 @@ test:
 	cordova requirements --verbose
 
 build:
-	cordova build --verbose
+	make webr
+	cordova build --verbose --buildConfig="./../android.keystore/build.json"
 
 run:
-	cordova run --device
+	make build --buildConfig="./../android.keystore/build.json"
+#        ./gradlew task-name
 
 deploy:
 	cordova run --device

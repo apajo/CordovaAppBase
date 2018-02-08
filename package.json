@@ -6,9 +6,19 @@
   "main": "index.js",
   "author": "Andres Pajo",
   "license": "Apache-2.0",
+  "app": {
+    "theme": "dark",
+    "metrika": false
+  },
+  "scripts": {
+    "gulp": "gulp",
+    "build:theme": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js --src=src/theme.json",
+    "build:src": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js  --src=src/app.json --concat"
+  },
   "dependencies": {
     "bootstrap": "3.3.7",
     "bootstrap-slider": "10.0.0",
+    "command-line-args": "^5.0.1",
     "cordova-android": "^7.0.0",
     "cordova-icon-generator": "0.0.4",
     "cordova-plugin-autostart": "git+https://github.com/ToniKorin/cordova-plugin-autostart.git",
@@ -24,15 +34,29 @@
     "jquery": "3.3.1"
   },
   "devDependencies": {
-    "uglify": "0.1.5",
-    "cpx": "1.5.0"
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-cli": "^2.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-debug-streams": "^3.0.0",
+    "gulp-html-minifier": "^0.1.8",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-less": "^3.3.0",
+    "gulp-minify": "^2.1.0",
+    "gulp-pug": "^3.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-watch": "^4.3.11",
+    "imagemin-pngquant": "^4.2.2",
+    "rimraf": "^2.5.4"
   },
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
       "cordova-plugin-background-mode": {},
-      "cordova-plugin-autostart": {},
-      "cordova-plugin-device-motion": {}
+      "cordova-plugin-autostart": {}
     },
     "platforms": [
       "android"
