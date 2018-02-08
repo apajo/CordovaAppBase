@@ -3,57 +3,21 @@
         .sidebar__cont
             .sidebar__menu
                 ul.nav.nav-menu
-                    li(class=page=='Dashboard' ? 'active' : '')
-                        a(href="index.html")
-                            .nav-menu__ico
-                                i.fa.fa-fw.fa-star
-                            .nav-menu__text
-                                span Dashboard
-                    li(class=page=='Products' ? 'active' : '')
-                        a(href="products.html")
-                            .nav-menu__ico
-                                i.fa.fa-fw.fa-cube
-                            .nav-menu__text
-                                span Products
-                    li(class=page=='Inbox' || page=='Sent' || page=='Compose' ? 'active opened' : '')
-                        a(href="#")
-                            .nav-menu__ico
-                                i.fa.fa-fw.fa-envelope
-                            .nav-menu__text
-                                span Mailbox
-                            .nav-menu__right
-                                i.fa.fa-fw.fa-angle-right.arrow
-                        ul.nav.nav-menu__second.collapse(class=page=='Inbox' || page=='Sent' || page=='Compose' ? 'in' : '')
-                            li(class=page == 'Inbox' ? 'active' : '')
-                                a(href="inbox.html") Inbox
-                            li(class=page == 'Sent' ? 'active' : '')
-                                a(href="sent.html") Sent
-                            li(class=page == 'Compose' ? 'active' : '')
-                                a(href="compose.html") Compose
-                    li(class=page=='Orders' ? 'active' : '')
-                        a(href="orders.html")
-                            .nav-menu__ico
-                                i.fa.fa-fw.fa-truck
-                            .nav-menu__text
-                                span Orders
-                            .nav-menu__right
-                                i.badge.badge-default 2
-                    li(class=page=='Users' ? 'active' : '')
-                        a(href="users.html")
+                    li.active
+                        a(href="login.html")
                             .nav-menu__ico
                                 i.fa.fa-fw.fa-user
                             .nav-menu__text
-                                span Users
-                    li(class=page=='Blank' ? 'active opened' : '')
-                        a(href="#")
+                                span Login
+                    li
+                        a(href="blank.html")
                             .nav-menu__ico
-                                i.fa.fa-fw.fa-folder-o
+                                i.fa.fa-fw.fa-cube
                             .nav-menu__text
-                                span Other
-                            .nav-menu__right
-                                i.fa.fa-fw.fa-angle-right.arrow
-                        ul.nav.nav-menu__second.collapse(class=page=='Blank' ? 'in' : '')
-                            li(class=page=='Blank' ? 'active' : '')
-                                a(href='blank.html') Blank
-                            li
-                                a(href='login.html') Login
+                                span Blank
+                    li
+                        a(href="canvas.html", data-type="layout")
+                            .nav-menu__ico
+                                i.fa.fa-fw.fa-film
+                            .nav-menu__text
+                                span Canvas

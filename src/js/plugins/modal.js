@@ -1,8 +1,5 @@
-Core.extend ("dialog", function (core) {
-    var modals = $('#modals .modal');
-        modals.modal();
-        modals.addClass("is-modal");
-        modals.modal('hide');
+Core.extend ("modal", function (core) {
+    var context = null;
 
     var createAlert = function (msg) {
         createModal("Tähelepanu!", msg, {
@@ -13,8 +10,7 @@ Core.extend ("dialog", function (core) {
     };
 
     var createModal = function (title, content, buttons) {
-        var context = $('#modals'),
-            id = context.find('> .modal').length,
+        var id = context.find('> .modal').length,
             html = `<div class="modal fade"  tabindex="-1" role="dialog" id="modal-`+id+`">
                 <div class="modal-dialog  modal-sm">
                     <div class="modal-content"> 
@@ -34,6 +30,10 @@ Core.extend ("dialog", function (core) {
             elem.find(".modal-body").append(content);
             //elem.find(".modal-footer").append(footer.join(""));
 
+        setTimeout(function () {
+            elem.modal("show");
+        }, 100);
+        
         var footer = elem.find(".modal-footer");
         for (var i in buttons) {
             //  data-dismiss="modal"
@@ -98,7 +98,8 @@ Core.extend ("dialog", function (core) {
 
     
     var dialogs = {
-		init : function () {
+        init : function () {
+            context = $(`<div id='modals'>`).appendTo("body");
             return true;
         },
         open : createModal,

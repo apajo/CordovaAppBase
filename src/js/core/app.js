@@ -60,6 +60,7 @@ var app = {
                 break;
         }
         
+        console.log("Core.init", app.ready);
         Core.init();
     }
 };

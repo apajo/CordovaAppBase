@@ -26,11 +26,12 @@ html(lang="en", data-debug='true')
         <![endif]-->
     block vars
     body.accelerate.main-scrollable(data-loading="false")
-        .wrapper
-            include ./navbar.pug
-            .dashboard
-                include ./sidebar.pug
-                include ./main.pug
+        #layout-container
+            .wrapper
+                include ./navbar.pug
+                .dashboard(data-backbutton="dashboard_menu", data-menubutton="dashboard_menu")
+                    include ./sidebar.pug
+                    include ./main.pug
 
         script(src='../dist/libs/jquery/jquery.min.js')
         script(src='../dist/libs/bootstrap/js/bootstrap.min.js')
