@@ -4,7 +4,7 @@ Core.extend("main", function (core) {
             //Core.loader.start("Please wait...");
 
             $(document).on("app:ready", function () {
-                Core.player.init();
+                //Core.player.init();
             });
             
             /* Core.query("", function (data) {

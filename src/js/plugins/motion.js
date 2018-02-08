@@ -1,30 +1,53 @@
 Core.extend("motion", function (core) {
-    function onSuccess(acceleration) {
-        $("#video-title").html([
-            acceleration.x,
-            acceleration.y,
-            acceleration.z,
-            acceleration.timestamp
-        ]);;
+    var watching = false;
+
+    var lastAcceleration = null;
+    var lastRotation = null;
+
+    var startWatch = function () {
+        watching = true;
+        window.addEventListener("devicemotion", onMotion, true);
     }
 
-    function onError() {
-        alert('onError!');
+    var stopWatch = function () {
+        window.removeEventListener("devicemotion");
+        watching = false;
     }
 
-    var options = { frequency: 3000 };  // Update every 3 seconds
+    var onMotion = function (acceleration) {
+        if (acceleration.accelerationIncludingGravity.x !== null) {
+            acc = lastAcceleration = acceleration.accelerationIncludingGravity;
+            
+            $(document).trigger("app:motion", [
+                acc.x,
+                acc.y,
+                acc.z
+            ]);
+        }
+        
+        if (acceleration.rotationRate.alpha !== null) {
+            lastRotation = acceleration.rotationRate;
+        }
+    }
+
+    var get = function (rotation) {
+        return rotation !== true ? lastAcceleration : lastRotation;
+    }
+    
+    var isWatching = function () {
+        return watching;
+    }
 
     return {
-        init : function (callback) {
-            var watchID = null;
-            
-            core.cordova("accelerometer", function (plugin) {
-                watchID = plugin.watchAcceleration(
-                    onSuccess,
-                    onError,
-                    options
-                )
-            });
+        init : function () {
+            startWatch();
         },
+        
+        onMotion : onMotion,
+        isWatching : isWatching,
+        
+        start : startWatch,
+        stop : stopWatch,
+        get : get
     }
 });
