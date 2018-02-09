@@ -4,17 +4,14 @@ Core.extend("intent", function (core) {
     var init = function () {
         core.cordova("intent", function (plugin) {
             plugin.getCordovaIntent(
-                function (intent) {
-                    Core.log("INTENT",intent);
-                },
+                onIntent,
                 onFail
             );
         });
 
         core.cordova("intent", function (plugin) {
-            plugin.setNewIntentHandler(function (intent) {
-                Core.log("INTENT",intent);
-            },function (intent) {
+            plugin.setNewIntentHandler(onIntent,
+            function (intent) {
                 Core.log("INTENT.ERR",arguments);
             } );
         });

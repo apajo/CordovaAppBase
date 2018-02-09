@@ -9,9 +9,7 @@ var Core = (function($){
         
         if (initState) {return false;}
 
-        //document.addEventListener("unload", end);
         $(document).one("unload", end);
-        //document.getElementsByTagName("body")[0].addEventListener("load", start);
         initState = true;
 
         start();
@@ -19,7 +17,6 @@ var Core = (function($){
         setTimeout(function () {
             $(document).trigger("app:ready", core);
         }, 100);
-
     };
 
     var ready = function (callback) {
@@ -72,9 +69,13 @@ var Core = (function($){
                         var ext = extension(name);
                     
 			if (ext.started == false) {
-                            Core.log(("plugin."+name+".start"));
+                                Core.log(("plugin."+name+".start"));
 				if (typeof core[name].init === "function") {
-					core[name].init();
+                                    try {
+                                        core[name].init();
+                                    } catch (e) {
+                                        Core.error("MODULE.INIT failed: " + e.toString());
+                                    }
 				}
                                 extensions[name].started = true;
 			} else {core.log("Unknown module: "+ name);}
