@@ -21,6 +21,9 @@ webr:
 #	node --use_strict ./node_modules/cordova-icon-generator/index.js --source "res/icon.png" --output "res/icon" -r
 #	node /home/andres/Desktop/cordova/YTRC/ytrc/src/cmd/webr.js
 
+webr-w:
+	npm run build:src:watch
+
 start:
 	make vars
 	make setup-device

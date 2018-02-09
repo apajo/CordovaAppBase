@@ -18,11 +18,12 @@ var gulp = require('gulp'),
 
 const optionDefinitions = [
   { name: 'src', alias:'s', type: String, multiple: false, defaultOption: true },
-    { name: 'concat', alias: 'c', type: Boolean }
+    { name: 'concat', alias: 'c', type: Boolean },
+    { name: 'watch', alias: 'w', type: Boolean }
 ];
 const commandLineArgs = require('command-line-args');
 const options = commandLineArgs(optionDefinitions);
-var defaultSrc = '../src/resources.json';
+var defaultSrc = '../src/app.json';
 
 var fs = require('fs');
 var json = fs.readFileSync(options.src ? options.src : defaultSrc, 'utf8');
@@ -35,119 +36,135 @@ var pugOptions = {
     basedir : 'www/',
     locals : packageVars
 };
+
 console.log('-----------------------------');
 
-gulp.task('pug:build', function () {
-	gulp.src(path.source.pug)
-		.pipe(pug(pugOptions))
-                .pipe(gulpif(options.concat, htmlmin({collapseWhitespace: true})))
-		.pipe(gulp.dest(path.dist.html));
+var Task = (function (paths) {
+    var tasks = [];
+    
+    var add = function (name, callback, target) {
+        var src = name.indexOf(":") > 0 ? name.split(":")[0] : name,
+            target = typeof target === "undefined" ? src : target;
+        
+        if (paths.source[src] && tasks.indexOf(name) < 0) {
+            tasks.push(name);
+            
+            gulp.task(name, function (cb) {
+                var pipe = callback(cb);
+
+                if (pipe) {
+                    pipe.pipe(gulp.dest(path.dist[target]));
+                }
+            });
+        }
+    };
+    
+    var addGroup = function (name, list) {
+        var fList = list.filter(function (a) {
+            return tasks.indexOf(a) >= 0;
+        });
+        
+        gulp.task(name, fList);
+    };
+    
+    var build = function (name, list) {
+        gulp.task(name, tasks);
+    };
+    
+    
+    var watch = function (name) {
+        gulp.task(name, function (){
+            tasks.map(function (name){
+                var src = name.indexOf(":") > 0 ? name.split(":")[0] : name,
+                    target = name;
+
+                if (paths.watch[src]) {
+                    gulp.watch(paths.watch[src], function(event, cb) {
+                        console.log("UPDATE ["+name+"]" + event.path);
+                        gulp.start(name);
+                    });
+                }
+            });
+        });
+    };
+    
+    return {
+        add : add,
+        build : build,
+        watch : watch
+    }
+})(path);
+
+Task.add('pug:build', function () {
+    return gulp.src(path.source.pug)
+            .pipe(pug(pugOptions))
+            .pipe(gulpif(options.concat, htmlmin({collapseWhitespace: true})));
+}, 'html');
+
+Task.add('js:build', function () {
+    return gulp.src(path.source.js)
+            .pipe(gulpif(options.concat, concat('all.min.js')))
+            .pipe(gulpif(options.concat, minify({
+                ext:{
+                    src:'-debug.js',
+                    min:'.js'
+                }
+            })));
 });
 
-gulp.task('js:build', function () {
-	gulp.src(path.source.js)
-                .pipe(gulpif(options.concat, concat('all.min.js')))
-                .pipe(gulpif(options.concat, minify({
-                    ext:{
-                        src:'-debug.js',
-                        min:'.js'
-                    }
-                })))
-		.pipe(gulp.dest(path.dist.js));
+Task.add('css:build', function () {
+    gulp.src(path.source.css)
+            .pipe(cssmin())
+            .pipe(gulpif(options.concat, concat('all.min.css')));
 });
 
-if (path.source.css) {
-    gulp.task('css:build', function () {
-            gulp.src(path.source.css)
-                    .pipe(cssmin())
-                    .pipe(gulpif(options.concat, concat('all.min.css')))
-                    .pipe(gulp.dest(path.dist.css));
-    });
-}
+Task.add('less:build', function () {
+    return gulp.src(path.source.less+'*.less')
+            .pipe(less())
+            .pipe(prefixer('last 2 versions'))
+            .pipe(gulp.dest(path.dist.css))
+            .pipe(cssmin())
+            .pipe(rename({suffix: '.min'}))
+            .pipe(gulpif(options.concat, concat('all.min.css')));
+});
 
-if (path.source.less) {
-    gulp.task('less:build', function () {
-            gulp.src(path.source.less+'*.less')
-                    .pipe(less())
-                    .pipe(prefixer('last 2 versions'))
-                    .pipe(gulp.dest(path.dist.css))
-                    .pipe(cssmin())
-                    .pipe(rename({suffix: '.min'}))
-                    .pipe(gulpif(options.concat, concat('all.min.css')))
-                    .pipe(gulp.dest(path.dist.css+'min/'));
-    });
-}
 
-gulp.task('libs:build', function() {
-	gulp.src(path.source.libs)
-		.pipe(gulp.dest(path.dist.libs));
+Task.add('libs:build', function() {
+    return gulp.src(path.source.libs);
 });
 
 gulp.task('image:build', function () {
-	gulp.src(path.source.img)
-		.pipe(imagemin({
-			progressive: true,
-			svgoPlugins: [{removeViewBox: false}],
-			use: [pngquant()],
-			interlaced: true
-		}))
-		.pipe(gulp.dest(path.dist.img));
+    return gulp.src(path.source.img)
+            .pipe(imagemin({
+                    progressive: true,
+                    svgoPlugins: [{removeViewBox: false}],
+                    use: [pngquant()],
+                    interlaced: true
+            }));
 });
 
-gulp.task('fonts:build', function() {
-	gulp.src(path.source.fonts)
-		.pipe(gulp.dest(path.dist.fonts));
+Task.add('fonts:build', function() {
+    return gulp.src(path.source.fonts);
 });
 
-gulp.task('data:build', function() {
-	gulp.src(path.source.data)
-		.pipe(gulp.dest(path.dist.data));
+Task.add('data:build', function() {
+	return gulp.src(path.source.data);
 });
 
 
-gulp.task('other:build', function() {
-	gulp.src(path.source.other)
-		.pipe(gulp.dest(path.dist.other));
+Task.add('other:build', function() {
+    return gulp.src(path.source.other);
 });
 
 
-gulp.task('clean', function (cb) {
+Task.add('clean', function (cb) {
 	rimraf('./dist', cb);
 });
 
-gulp.task('build', [
-	'js:build',
-	path.source.css ? 'css:build' : 'less:build',
-	'libs:build',
-	'fonts:build',
-	'data:build',
-	'image:build',
-	'pug:build',
-	'other:build'
-]);
+Task.build('build');
+Task.watch('watch');
 
-gulp.task('watch', function(){
-	watch([path.watch.pug], function(event, cb) {
-		gulp.start('pug:build');
-	});
-	watch([path.watch.less], function(event, cb) {
-		gulp.start('less:build');
-	});
-	watch([path.watch.js], function(event, cb) {
-		gulp.start('js:build');
-	});
-	watch([path.watch.libs], function(event, cb) {
-		gulp.start('libs:build');
-	});
-	watch([path.watch.img], function(event, cb) {
-		gulp.start('image:build');
-	});
-	watch([path.watch.fonts], function(event, cb) {
-		gulp.start('fonts:build');
-	});
-	watch([path.watch.data], function(event, cb) {
-		gulp.start('data:build');
-	});
-});
+console.log(options);
+var defaultTasks = options.watch ? ['build', 'watch'] : ['build'];
+gulp.task('default', defaultTasks);
 
-gulp.task('default', ['build']);
