@@ -30,7 +30,7 @@ Core.extend("events", function (core) {
             Core.pldata.getPlaylistItems('PLvbgmMVUKHN7hkaKkf0XQGz4LhUy6dL9S', function (data){
                 Core.log(data);
             });
-            
+
             return true;
         };
 

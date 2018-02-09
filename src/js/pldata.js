@@ -3,33 +3,23 @@ Core.extend("pldata", function (core) {
         var videoURL= 'http://www.youtube.com/watch?v=';
         
 
-        $.post('http://www.youtube.com/playlist?list='+playListId, 
-        {}, {
-            dataType: 'json',
-            async: true,
-            crossDomain: true,
-            xhrFields: {
-                withCredentials: true
-            },
-            success: function(data) {
-                var list_data="";
+        $.ajax({
+            type: "GET",
+            url:'https://www.youtube.com/playlist?list='+playListId,
+            success: function( data ) {
+                var dom = $(data);
 
-                $.each(data.feed.entry, function(i, item) {
-                    list_data.push({
-                    'feedTitle' : item.title.$t,
-                    'feedURL' : item.link[1].href,
-                    'fragments' : feedURL.split("/"),
-                    'videoID' : fragments[fragments.length - 2],
-                    'url' : videoURL + videoID,
-                    'thumb' : "http://img.youtube.com/vi/"+ videoID +"/hqdefault.jpg",
-                    });
-                });
+                var listItems = dom.find(".ytd-playlist-video-renderer");
+                console.log(listItems);
+                var result = {
+                    title : dom.find("#title").text(), 
+                    list : dom.find("#title").text(), 
+                };
 
-                callback(list_data);
+                return result;
             }
         });
     }
-
     var resolveUrlData = function (url) {
         var regex = /(?:\?v=|\?list=|be\/)(\w*)/,
             result = regex.exec(url);

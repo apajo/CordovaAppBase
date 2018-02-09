@@ -1,7 +1,8 @@
 Core.extend("menu", function (core) {
 	var baseUrl = 'html/pages/',
             context = null,
-            container = null;
+            container = null,
+            lastHref = null;
         
         var init = function () {
             context = $(".sidebar");
@@ -25,6 +26,8 @@ Core.extend("menu", function (core) {
         };
         
         var load = function (href, target) {
+            $(document).trigger("app:page:unload", lastHref);
+            
             $.get(baseUrl + href, function (d) {
                 switch (target) {
                     case 'layout':
@@ -34,6 +37,8 @@ Core.extend("menu", function (core) {
                         container.html(d);
                 }
                 
+                $(document).trigger("app:page:load", href);
+                lastHref = href;
             });
         };
         

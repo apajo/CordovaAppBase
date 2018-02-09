@@ -1,15 +1,22 @@
 Core.extend("plintent", function (core) {
         var init = function () {
-            /*core.intent.addListener("text/plain", function (items, extras) {
-                Core.log(items);
-                
+            core.intent.addListener("text/plain", function (items, extras) {
                 items = items.map(function (a) {
-                    return resolveUrlData(a.text);
+                    var data = resolveUrlData(a.text);
+                    
+                    data.title = a.text.substr(0, a.text.indexOf(":"));
+                    
+                    return data;
                 });
                 
                 Core.log(items);
+                
+                items.map(function (a) {
+                    Core.playlist.add(a);
+                    //Core.player.load(data.id, data.type);
+                });
             });
-            */
+            
             return true;
         };
         

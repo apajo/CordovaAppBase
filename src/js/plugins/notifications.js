@@ -1,7 +1,7 @@
 /*
  * System notifications
  */
-Core.extend ("notification", function () {
+/* Core.extend ("notification", function () {
 	var idOffset = 100,
 		enabled = true;
 	
@@ -60,4 +60,4 @@ Core.extend ("notification", function () {
 		disable : disable,
 		enable : enable
 	}
-});
+}); */
