@@ -50,13 +50,13 @@ Core.extend("config", function (core) {
         load(function (cfg) {
             cache = $.extend(defaultConfig, cfg);
         }, function (cfg) {
-            console.log("CFG_DATA_ERR", arguments);
+            Core.log("CFG_DATA_ERR", arguments);
         });
 
         return true;
     }
 	
-	var uninit = function () {console.log("STOP CFG");
+	var uninit = function () {Core.log("STOP CFG");
 		save();
 		
 		return true;
@@ -71,7 +71,7 @@ Core.extend("config", function (core) {
     };
     
     var save = function (success, fail) {
-        console.log("CFG.save", cache);
+        Core.log("CFG.save", cache);
 
         _storageSystems[system].set({}, function (cfg) {
             if (typeof success === "function") { success(cfg); }
@@ -107,7 +107,7 @@ Core.extend("config", function (core) {
 		};
 	
 		//core.dialog.alert('Error#'+e.code+'(' + fileName + '): ' + msg);
-        console.log("config.err", 'Error#'+e.code+': '+ msg, e);
+        Core.log("config.err", 'Error#'+e.code+': '+ msg, e);
 	};
 	
 	return {
@@ -115,13 +115,13 @@ Core.extend("config", function (core) {
 		uninit : uninit,
 		
 		get : function (name) {
-            console.log("cfg", cache, name, cache[name]);
+            Core.log("cfg", cache, name, cache[name]);
             if (typeof name !== "undefined") {
                 return cache[name];
             } else { return conf; }
 		},
 
-		set : function (name, val) {console.log("SET.CFG", name, val);
+		set : function (name, val) {Core.log("SET.CFG", name, val);
 			cache[name] = val;
 
             if (autoSave) { 

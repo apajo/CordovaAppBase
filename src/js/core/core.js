@@ -5,9 +5,9 @@ var Core = (function($){
             extensions = [];
 
     var init = function () {
+        console.groupEnd();
+        
         if (initState) {return false;}
-
-        core.log("INIT");
 
         //document.addEventListener("unload", end);
         $(document).one("unload", end);
@@ -15,7 +15,7 @@ var Core = (function($){
         initState = true;
 
         start();
-
+        
         setTimeout(function () {
             $(document).trigger("app:ready", core);
         }, 100);
@@ -34,12 +34,15 @@ var Core = (function($){
     };
 
 	var extend = function (name, creator) {
-		core.log(("plugin.register."+name).toUpperCase());
+		core.log("plugin.register."+name);
 
 		extensions[name] = {
 			name : name,
-			creator : creator
+			creator : creator,
+                        started : false
 		};
+                
+                core[name] = new creator(core);
 	};
 
 	var extension = function (name) {
@@ -60,20 +63,20 @@ var Core = (function($){
 
 	var start = function (name) {
 		if (typeof name === "undefined") {
+                        console.groupCollapsed('Core.init');
 			for(var i in extensions){
                             start(extensions[i].name);
 			}
+                        console.groupEnd();
 		} else {
                         var ext = extension(name);
                     
-			if (plugin(name) == null && typeof ext  !== "undefined") {
-                            console.log(("plugin."+name+".start").toUpperCase());
-                
-				core[name] = new ext.creator(core) ;
-	
+			if (ext.started == false) {
+                            Core.log(("plugin."+name+".start"));
 				if (typeof core[name].init === "function") {
 					core[name].init();
 				}
+                                extensions[name].started = true;
 			} else {core.log("Unknown module: "+ name);}
 		}
 	};
@@ -83,21 +86,13 @@ var Core = (function($){
 	 */
 	var stop = function (name) {
 		if (typeof name === "undefined") {
-			for(var i in extensions) {
-				if (typeof core[extensions[i].name] !== "undefined" && core[extensions[i].name] !== null) {
-					if (typeof core[extensions[i].name].uninit === "function") {
-						core[extensions[i].name].uninit();
-					}
-
-					core[extensions[i].name] = null;
-				} else {
-                                    //console.error("Extension ("+extensions[i].name+") already instantiated!");
-				}
+			for(var i in extensions){
+                            start(extensions[i].name);
 			}
 		} else {
 			var ext = plugin(name);
 			
-			if (ext !== null) {
+			if (ext.started == true) {
 				if (typeof ext.uninit === "function") {
 					ext.uninit();
 				}
@@ -113,22 +108,21 @@ var Core = (function($){
         return typeof cordova !== "undefined";
     };
     
-    var log = function () {
-        var logr = function(){
-            var i = -1, l = arguments.length, args = [], fn = 'console.log(args)';
-            while(++i<l){
-                args.push('args['+i+']');
-            };
-            fn = new Function('args',fn.replace(/args/,args.join(',')));
-            fn(arguments);
-        };
-        
-        if (core.DEBUG()) {
-            logr("[CORE]", arguments);
+    var log = function (msg, params) {
+        if (core.DEBUG() &&  window.console) {
+            console.log(msg);
         }  
     };
-    
-    
+    var warn = function (msg, params) {
+        if (core.DEBUG() &&  window.console) {
+            console.warn(msg);
+        }  
+    };
+    var error = function (msg, params) {
+        if (core.DEBUG() &&  window.console) {
+            console.error(msg);
+        }  
+    };
 	/*
 	 * Uninit all the modules and close the app
 	 */
@@ -141,26 +135,30 @@ var Core = (function($){
 			navigator.app.exitApp();
 		}
         
-        core.log("THE END!");
+            core.log("THE END!");
 	};
 
 	core = {
-		init : init,
-		DEBUG : function (setMode) {
-			if (typeof setMode !== "undefined") {
-				$("html").attr('data-debug', setMode ? 'true' : 'false');
-			}
-			
-			return typeof setMode === "undefined" ?
-				DEBUG : DEBUG = setMode;
-		},
-        isApp : isApp,
-        ready : ready,
-        log : log, debug : log,
-		extend : extend,
-		start : start,
-		end : end
+            init : init,
+            DEBUG : function (setMode) {
+                    if (typeof setMode !== "undefined") {
+                            $("html").attr('data-debug', setMode ? 'true' : 'false');
+                    }
+
+                    return typeof setMode === "undefined" ?
+                            DEBUG : DEBUG = setMode;
+            },
+            isApp : isApp,
+            ready : ready,
+            log : log,
+            warn : warn,
+            error : error,
+            debug : log,
+            extend : extend,
+            start : start,
+            end : end
 	};
 
 	return core;
 })(jQuery);
+console.groupCollapsed('Core.plugin.register');

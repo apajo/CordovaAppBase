@@ -11,7 +11,7 @@
 	},
 	"source": {
 		"pug": "src/html/**/*.pug",
-		"js": ["src/js/core/*.js", "src/js/**/*.js"],
+		"js": ["src/js/*/*.js", "src/js/**/*.js"],
 		"css": "src/css/*.css",
 		"img": "src/img/**/*.*",
 		"fonts": "src/fonts/**/*.*",
@@ -20,8 +20,8 @@
 		"other": "src/*.*asdf"
 	},
 	"watch": {
-		"pug": "src/html/**/*.*",
-		"js": ["src/js/core/*.js", "src/js/**/*.js"],
+		"pug": "src/html/**/*.pug",
+		"js": ["src/js/*/*.js", "src/js/**/*.js"],
 		"css": "src/css/*.css",
 		"img": "src/img/**/*.*",
 		"fonts": "src/fonts/**/*.*",

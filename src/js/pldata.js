@@ -1,78 +1,47 @@
-Core.extend("events", function (core) {
-        var init = function () {
-            // ESC KEY
-            $(document).keyup(function(e) {
-                if (e.keyCode == 27) { 
-                   onBackbutton(e);
-                }
-            });
-            // BACKBUTTON / menu button
-            document.addEventListener('deviceready', function () {
-                document.addEventListener('menubutton', onMenuButton, false);
-                document.addEventListener('backbutton', onBackButton, false);
-            });
-            
-            $(document).on("click", "#fb-login", function (e) {
-                core.fb.login();
-            });
-            
-            $(document).on("click", "#modal-btn", function (e){
-                Core.modal.open("Tähelepanu!", 'Sisukas sisutekst', {
-                    "OK" : function (modal) {
-                        return false;
-                    },
-                    "Cancel" : function (modal) {
-                        return true;
-                    }
+Core.extend("pldata", function (core) {
+    var getPlaylistItems = function (playListId, callback) {
+        var videoURL= 'http://www.youtube.com/watch?v=';
+        
+
+        $.post('http://www.youtube.com/playlist?list='+playListId, 
+        {}, {
+            dataType: 'json',
+            async: true,
+            crossDomain: true,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function(data) {
+                var list_data="";
+
+                $.each(data.feed.entry, function(i, item) {
+                    list_data.push({
+                    'feedTitle' : item.title.$t,
+                    'feedURL' : item.link[1].href,
+                    'fragments' : feedURL.split("/"),
+                    'videoID' : fragments[fragments.length - 2],
+                    'url' : videoURL + videoID,
+                    'thumb' : "http://img.youtube.com/vi/"+ videoID +"/hqdefault.jpg",
+                    });
                 });
-            });
-            
-            return true;
+
+                callback(list_data);
+            }
+        });
+    }
+
+    var resolveUrlData = function (url) {
+        var regex = /(?:\?v=|\?list=|be\/)(\w*)/,
+            result = regex.exec(url);
+
+        return {
+            type : result[1].substr(0, 2) == 'PL' ? 'playlist' : 'video',
+            id : result[1]
         };
+    }
 
-        var onBackbutton = function (e) {
-            console.log(e);
-            var elems = $("body").find("*[data-backbutton]");
-            
-            for (var i = 0; i < elems.length; i++) {
-                var elem = $(elems[i]),
-                    data = elem.attr("data-backbutton");
-                
-                if (elem.hasClass(data)) {
-                    elem.removeClass(data);
-                    
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    return false;
-                }
-            } 
-            
-            return true;
-        }
-
-        var onMenuButton = function (e) {
-            console.log(e);
-            var elems = $("body").find("*[data-menubutton]");
-            
-            for (var i = 0; i < elems.length; i++) {
-                var elem = $(elems[i]),
-                    data = elem.attr("data-menubutton");
-                
-                if (!elem.hasClass(data)) {
-                    elem.addClass(data);
-                    
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    return false;
-                }
-            } 
-            
-            return true;
-        }
-
-	return {
-            init : init,
-        };
+    return {
+        getPlaylistItems : getPlaylistItems,
+        resolveUrlData: resolveUrlData
+    };
 });

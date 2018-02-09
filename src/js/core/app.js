@@ -18,13 +18,26 @@
  */
 var app = {
     ready : {
-        device : typeof window.cordova !== "undefined",
+        device : false,
         document : false
     },
     
     // Application Constructor
     initialize : function() {
         this.bindEvents();
+        
+        $.get("cordova.js", function ( ){
+            $.ajax({
+                url: "cordova.js",
+                dataType: "script",
+                cache: true,
+                success: function() {
+                }
+            })
+        }).fail(function() {
+            app.receivedEvent('deviceready');
+        });;
+
     },
     // Bind Event Listeners
     //
@@ -60,8 +73,9 @@ var app = {
                 break;
         }
         
-        console.log("Core.init", app.ready);
-        Core.init();
+        if (app.ready.document && app.ready.device) {
+            Core.init();
+        }
     }
 };
 

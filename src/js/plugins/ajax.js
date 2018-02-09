@@ -25,7 +25,7 @@ Core.extend("query", function (core) {
                     error: failed
                 });
             /* } else {
-                console.log("No Connection!");
+                Core.log("No Connection!");
                 failed(null, "Interneti ühendus puudub!");
             }*/
 		};

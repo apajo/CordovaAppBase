@@ -8,8 +8,8 @@ Core.extend("events", function (core) {
             });
             // BACKBUTTON / menu button
             document.addEventListener('deviceready', function () {
-                document.addEventListener('menubutton', onMenuButton, false);
-                document.addEventListener('backbutton', onBackButton, false);
+                document.addEventListener('menubutton', onMenubutton, false);
+                document.addEventListener('backbutton', onBackbutton, false);
             });
             
             $(document).on("click", "#fb-login", function (e) {
@@ -27,11 +27,15 @@ Core.extend("events", function (core) {
                 });
             });
             
+            Core.pldata.getPlaylistItems('PLvbgmMVUKHN7hkaKkf0XQGz4LhUy6dL9S', function (data){
+                Core.log(data);
+            });
+            
             return true;
         };
 
         var onBackbutton = function (e) {
-            console.log(e);
+            Core.log(e);
             var elems = $("body").find("*[data-backbutton]");
             
             for (var i = 0; i < elems.length; i++) {
@@ -48,11 +52,13 @@ Core.extend("events", function (core) {
                 }
             } 
             
+            Core.end();
+            
             return true;
         }
 
-        var onMenuButton = function (e) {
-            console.log(e);
+        var onMenubutton = function (e) {
+            Core.log(e);
             var elems = $("body").find("*[data-menubutton]");
             
             for (var i = 0; i < elems.length; i++) {

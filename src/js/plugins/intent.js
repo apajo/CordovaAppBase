@@ -1,49 +1,63 @@
-Core.extend("fb", function (core) {
-        var init = function () {
-        };
-        
-        var login = function () {
-            CordovaFacebook.login({
-               permissions: ['email'],
-               onSuccess: onLogin,
-               onFailure: onFailure
-            });
-        };
-        
-        var logout = function () {
-            CordovaFacebook.logout({
-               onSuccess: onLogout
-            });
-        };
-        
-        var onLogin = function(result) {
-            if(result.declined.length > 0) {
-               alert("The User declined something!");
-            }
-         } ;
-        
-        
-        var onLogout = function() {
-            alert("The user is now logged out");
-         };
-         
-        var onSuccess = function(result) {
-            if(result.declined.length > 0) {
-               alert("The User declined something!");
-            }
-         } ;
-        
-        var onFailure = function(result) {
-            if(result.cancelled) {
-               alert("The user doesn't like my app");
-            } else if(result.error) {
-               alert("There was an error:" + result.errorLocalized);
-            }
-         }
+Core.extend("intent", function (core) {
+    var listeners = [];
+    
+    var init = function () {
+        core.cordova("intent", function (plugin) {
+            plugin.getCordovaIntent(
+                function (intent) {
+                    Core.log("INTENT",intent);
+                },
+                onFail
+            );
+        });
 
-	return {
-            init : init,
-            login : login,
-            logout : logout
-        };
+        core.cordova("intent", function (plugin) {
+            plugin.setNewIntentHandler(function (intent) {
+                Core.log("INTENT",intent);
+            },function (intent) {
+                Core.log("INTENT.ERR",arguments);
+            } );
+        });
+    };
+
+    /* var get = function ( ) {
+        core.cordova("intent", function (plugin) {
+            plugin.getCordovaIntent(
+                onIntent,
+                onFail
+            );
+        });
+    }*/
+
+    var onIntent = function (intent) {
+        Core.log("INTENT",intent);
+        
+        listeners.map(function (a) {
+            if (intent.action == "android.intent.action.SEND" && a.type == intent.type) {
+                if (typeof a.callback === "function") {
+                    a.callback(intent.clipItems, intent.extras, intent);
+                }
+            }
+        });
+        
+        core.cordova("intent", function (plugin) {
+            plugin.setNewIntentHandler(onIntent);
+        });
+    } 
+
+    var onFail = function () {
+    }
+
+    var add = function (type, callback) {
+        Core.log("intent listener", type);
+        listeners.push({
+            type : type,
+            callback : callback
+        });
+    }
+
+    return {
+        init : init,
+        addListener : add
+    };
 });

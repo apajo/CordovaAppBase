@@ -1,5 +1,5 @@
 Core.extend("menu", function (core) {
-	var baseUrl = 'pages/',
+	var baseUrl = 'html/pages/',
             context = null,
             container = null;
         

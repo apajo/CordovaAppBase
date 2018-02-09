@@ -52,7 +52,7 @@ Core.extend("splash", function (core) {
             try {
                 navigator.splashscreen.hide();
             } catch (e) {
-               // console.log("splashscreen.err", e);
+               // Core.log("splashscreen.err", e);
             }
         },
         

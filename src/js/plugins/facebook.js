@@ -17,22 +17,16 @@ Core.extend("fb", function (core) {
         };
         
         var onLogin = function(result) {
+            Core.log(result);
             if(result.declined.length > 0) {
                alert("The User declined something!");
             }
          } ;
-        
         
         var onLogout = function() {
             alert("The user is now logged out");
          };
          
-        var onSuccess = function(result) {
-            if(result.declined.length > 0) {
-               alert("The User declined something!");
-            }
-         } ;
-        
         var onFailure = function(result) {
             if(result.cancelled) {
                alert("The user doesn't like my app");
