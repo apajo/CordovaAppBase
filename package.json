@@ -14,7 +14,14 @@
     "gulp": "gulp",
     "build:app:theme": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js --src=src/app/theme.json",
     "build:app:src": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js  --src=src/app/app.json --concat",
-    "build:app:src:watch": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js  --src=src/app/app.json --concat --watch"
+    "build:app:src:watch": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js  --src=src/app/app.json --concat --watch",
+    "build:server:theme": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js --src=src/server/theme.json",
+    "build:server:src": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js  --src=src/server/app.json --concat",
+    "build:server:src:watch": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js  --src=src/server/app.json --concat --watch",
+    "build:web.app:src": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js  --src=src/web/app.json --concat",
+    "build:web.app:src:watch": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js  --src=src/web/app.json --concat --watch",
+    "build:web.player:src": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js  --src=src/web/player.json --concat",
+    "build:web.player:src:watch": "node vendor/lib/node_modules/gulp-cli/bin/gulp.js  --src=src/web/player.json --concat --watch"
   },
   "dependencies": {
     "bootstrap": "3.3.7",

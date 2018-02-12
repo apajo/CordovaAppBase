@@ -23,21 +23,26 @@ const optionDefinitions = [
 ];
 const commandLineArgs = require('command-line-args');
 const options = commandLineArgs(optionDefinitions);
-var defaultSrc = '../src/app.json';
+var basePath = './';
+var defaultSrc = basePath+'src/app.json';
 
 var fs = require('fs');
 var json = fs.readFileSync(options.src ? options.src : defaultSrc, 'utf8');
 var path = JSON.parse(json);
 
-var json = fs.readFileSync('package.json', 'utf8');
+var json = fs.readFileSync(basePath+'package.json', 'utf8');
 var packageVars = JSON.parse(json);
 var pugOptions = {
     pretty: true, 
-    basedir : 'www/',
+    basedir : 'dist/',
     locals : packageVars
 };
 
-console.log('-----------------------------');
+console.log('--------------------------------------------------------------------');
+console.log('--------------------------------------------------------------------');
+console.log('--------------------------------------------------------------------');
+console.log('--------------------------------------------------------------------');
+console.log('--------------------------------------------------------------------');
 
 var Task = (function (paths) {
     var tasks = [];
@@ -108,10 +113,9 @@ Task.add('html:build', function () {
             .pipe(gulpif(options.concat, htmlmin({collapseWhitespace: true})));
 });
 
-Task.add('src:build', function () {
-    return gulp.src(path.source.src);
+Task.add('php:build', function () {
+    return gulp.src(path.source.php);
 });
-
 
 Task.add('js:build', function () {
     return gulp.src(path.source.js)

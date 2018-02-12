@@ -1,0 +1,23 @@
+{
+	"dist": {
+            "html": "dist/web/player/",
+            "js": "dist/web/player/",
+            "css": "dist/web/player/",
+            "img": "dist/web/player/",
+            "libs": "dist/web/player/libs/"
+	},
+	"source": {
+            "html": "src/web/player/*.html",
+            "js": "src/web/player/*.js",
+            "css": "src/web/player/*.css",
+            "img": "src/web/player/img/*.*",
+            "libs": "src/web/player/libs/**/*.*"
+	},
+	"watch": {
+            "html": "src/web/player/*.html",
+            "js": "src/web/player/*.js",
+            "css": "src/web/player/*.css",
+            "img": "src/web/player/img/*.*",
+            "libs": "src/web/player/libs/**/*.*"
+	}
+}

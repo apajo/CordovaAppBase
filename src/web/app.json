@@ -1,32 +1,25 @@
 {
-	"dist": {
-		"html": "dist/web/html/",
-		"js": "dist/web/js/",
-		"css": "dist/web/css/",
-		"img": "dist/web/img/",
-		"fonts": "dist/web/fonts/",
-		"libs": "dist/web/libs/",
-		"data": "dist/web/data/",
-		"other": "dist/web/"
-	},
-	"source": {
-		"html": "src/web/html/**/*.pug",
-		"js": ["src/web/js/*/*.js", "src/web/js/**/*.js"],
-		"css": "src/web/css/*.css",
-		"img": "src/web/img/*.*",
-		"fonts": "src/web/fonts/**/*.*",
-		"libs": "src/web/libs/**/*.*",
-		"data": "src/web/data/**/*.*",
-		"other": "src/web/*.*"
-	},
-	"watch": {
-		"html": "src/web/html/**/*.pug",
-		"js": ["src/web/js/*/*.js", "src/web/js/**/*.js"],
-		"css": "src/web/css/*.css",
-		"img": "src/web/img/*.*",
-		"fonts": "src/web/fonts/**/*.*",
-		"libs": "src/web/libs/**/*.*",
-		"data": "src/web/data/**/*.*",
-		"other": "src/web/*.*"
-	}
+    "dist": {
+            "html": "dist/web/app/",
+            "js": "dist/web/app/",
+            "css": "dist/web/app/",
+            "img": "dist/web/app/",
+            "libs": "dist/web/app/",
+            "php": "dist/web/app/"
+    },
+    "source": {
+            "php": "src/web/app/**/*.php",
+            "js": "src/web/app/**/*.js",
+            "css": "src/web/app/**/*.css",
+            "img": "src/web/app/**/img/*.*",
+            "libs": "src/web/app/**/libs/*.*"
+    },
+    "watch": {
+            "php": "src/web/app/**/*.php",
+            "html": "src/web/app/**/*.html",
+            "js": "src/web/app/**/*.js",
+            "css": "src/web/app/**/*.css",
+            "img": "src/web/app/**/img/*.*",
+            "libs": "src/web/app/**/libs/*.*"
+    }
 }

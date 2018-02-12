@@ -14,15 +14,17 @@ update:
 	npm update
 
 webr:
-#	node build
-	npm run build:app:theme
-	npm run build:app:src
-#	php -q ./src/cmd/webr.php
-#	node --use_strict ./node_modules/cordova-icon-generator/index.js --source "res/icon.png" --output "res/icon" -r
-#	node /home/andres/Desktop/cordova/YTRC/ytrc/src/cmd/webr.js
+#	npm run build:app:src
+#	npm run build:server:src
+	npm run build:web.app:src
+	npm run build:web.player:src
 
 webr-w:
-	npm run build:src:watch
+	npm run build::app:src:watch
+
+webr-theme:
+	npm run build:app:theme
+	npm run build:server:theme
 
 start:
 	make vars
