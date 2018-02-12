@@ -131,13 +131,14 @@ Task.add('css:build', function () {
 }, 'css');
 
 Task.add('less:build', function () {
-    return gulp.src(path.source.less+'*.less')
+    gulp.src(path.source.less+'*.less')
             .pipe(less())
             .pipe(prefixer('last 2 versions'))
             .pipe(gulp.dest(path.dist.css))
             .pipe(cssmin())
             .pipe(rename({suffix: '.min'}))
-            .pipe(gulpif(options.concat, concat('all.min.css')));
+            .pipe(gulpif(options.concat, concat('all.min.css')))
+            .pipe(gulp.dest(path.dist.css+'min/'));
 });
 
 

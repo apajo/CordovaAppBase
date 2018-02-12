@@ -15,8 +15,8 @@ update:
 
 webr:
 #	node build
-#	npm run build:theme
-	npm run build:src
+	npm run build:app:theme
+	npm run build:app:src
 #	php -q ./src/cmd/webr.php
 #	node --use_strict ./node_modules/cordova-icon-generator/index.js --source "res/icon.png" --output "res/icon" -r
 #	node /home/andres/Desktop/cordova/YTRC/ytrc/src/cmd/webr.js
