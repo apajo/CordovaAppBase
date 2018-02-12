@@ -103,6 +103,16 @@ Task.add('pug:build', function () {
             .pipe(gulpif(options.concat, htmlmin({collapseWhitespace: true})));
 }, 'html');
 
+Task.add('html:build', function () {
+    return gulp.src(path.source.html)
+            .pipe(gulpif(options.concat, htmlmin({collapseWhitespace: true})));
+});
+
+Task.add('src:build', function () {
+    return gulp.src(path.source.src);
+});
+
+
 Task.add('js:build', function () {
     return gulp.src(path.source.js)
             .pipe(gulpif(options.concat, concat('all.min.js')))
