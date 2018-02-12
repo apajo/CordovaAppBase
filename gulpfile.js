@@ -44,17 +44,19 @@ var Task = (function (paths) {
     
     var add = function (name, callback, target) {
         var src = name.indexOf(":") > 0 ? name.split(":")[0] : name,
-            target = typeof target === "undefined" ? src : target;
+            target = target ? target : src;
         
         if (paths.source[src] && tasks.indexOf(name) < 0) {
             tasks.push(name);
             
             gulp.task(name, function (cb) {
-                var pipe = callback(cb);
+                var pipe = callback();
 
                 if (pipe) {
                     pipe.pipe(gulp.dest(path.dist[target]));
                 }
+                
+                return pipe;
             });
         }
     };
@@ -74,14 +76,14 @@ var Task = (function (paths) {
     
     var watch = function (name) {
         gulp.task(name, function (){
-            tasks.map(function (name){
-                var src = name.indexOf(":") > 0 ? name.split(":")[0] : name,
-                    target = name;
+            tasks.map(function (taskName){
+                var src = taskName.indexOf(":") > 0 ? taskName.split(":")[0] : taskName,
+                    target = taskName;
 
                 if (paths.watch[src]) {
                     gulp.watch(paths.watch[src], function(event, cb) {
-                        console.log("UPDATE ["+name+"]" + event.path);
-                        gulp.start(name);
+                        console.log("UPDATE ["+taskName+"]: " + event.path.substr(event.path.lastIndexOf('/') + 1));
+                        gulp.start(taskName);
                     });
                 }
             });
@@ -113,10 +115,10 @@ Task.add('js:build', function () {
 });
 
 Task.add('css:build', function () {
-    gulp.src(path.source.css)
+    return gulp.src(path.source.css)
             .pipe(cssmin())
             .pipe(gulpif(options.concat, concat('all.min.css')));
-});
+}, 'css');
 
 Task.add('less:build', function () {
     return gulp.src(path.source.less+'*.less')
@@ -133,7 +135,7 @@ Task.add('libs:build', function() {
     return gulp.src(path.source.libs);
 });
 
-gulp.task('image:build', function () {
+gulp.task('img:build', function () {
     return gulp.src(path.source.img)
             .pipe(imagemin({
                     progressive: true,

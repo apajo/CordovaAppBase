@@ -8,4 +8,5 @@
 /npm-debug.log
 /tmp
 /vendor
-/www/*
+/dist/*
+/www

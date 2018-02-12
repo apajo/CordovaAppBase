@@ -1,0 +1,5 @@
+[
+    {"name":"192.168.0.12", "address":"192.168.0.12:5050", "public":false},
+    {"name":"localhost.apajo.ee", "address":"localhost.apajo.ee:5050", "public":false},
+    {"name":"localhost", "address":"localhost:5050", "public":false}
+]

@@ -1,0 +1,32 @@
+{
+	"dist": {
+		"html": "www/html/",
+		"js": "www/js/",
+		"css": "www/css/",
+		"img": "www/img/",
+		"fonts": "www/fonts/",
+		"libs": "www/libs/",
+		"data": "www/data/",
+		"other": "www/"
+	},
+	"source": {
+		"pug": "src/app/html/**/*.pug",
+		"js": ["src/app/js/*/*.js", "src/app/js/**/*.js"],
+		"css": "src/app/css/*.css",
+		"img": "src/app/img/*.*",
+		"fonts": "src/app/fonts/**/*.*",
+		"libs": "src/app/libs/**/*.*",
+		"data": "src/app/data/**/*.*",
+		"other": "src/app/*.*asdf"
+	},
+	"watch": {
+		"pug": "src/app/html/**/*.pug",
+		"js": ["src/app/js/*/*.js", "src/app/js/**/*.js"],
+		"css": "src/app/css/*.css",
+		"img": "src/app/img/*.*",
+		"fonts": "src/app/fonts/**/*.*",
+		"libs": "src/app/libs/**/*.*",
+		"data": "src/app/data/**/*.*",
+		"other": "src/app/*.*asdf"
+	}
+}

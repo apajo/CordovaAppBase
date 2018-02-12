@@ -7,7 +7,7 @@
     <author email="andres@apajo.ee" href="http://www.apajo.ee/">
         Andres Pajo
     </author>
-    <content src="html/index.html" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -15,6 +15,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <allow-intent href="*:*" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="res/icon/android/ldpi.png" />
@@ -42,15 +43,23 @@
     <preference name="BackgroundColor" value="000" />
     <preference name="HideKeyboardFormAccessoryBar" value="true" />
     <preference name="Orientation" value="default" />
-    <preference name="AndroidLaunchMode" value="singleTask" />
+    <preference name="AndroidLaunchMode" value="singleInstance" />
     <preference name="android-targetSdkVersion" value="23" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="EnableWebGL" value="true" />
     <preference name="FullScreen" value="true" />
     <preference name="KeepRunning" value="true" />
     <preference name="ShowTitle" value="false" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="iosPersistentFileLocation" value="Compatibility" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
     <plugin name="cordova-plugin-autostart" spec="git+https://github.com/ToniKorin/cordova-plugin-autostart.git" />
+    <plugin name="cordova-plugin-facebook" spec="^0.2.2">
+        <variable name="FACEBOOK_DISPLAY_NAME" value="Youtube Remote Control - Test1" />
+        <variable name="FACEBOOK_APP_ID" value="549333892089929" />
+    </plugin>
+    <plugin name="com.napolitano.cordova.plugin.intent" spec="https://github.com/napolitano/cordova-plugin-intent" />
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <engine name="android" spec="^7.0.0" />
 </widget>

@@ -1,0 +1,32 @@
+{
+	"dist": {
+		"html": "dist/app/dist/",
+		"js": "dist/app/dist/js/",
+		"css": "dist/app/dist/css/",
+		"img": "dist/app/dist/img/",
+		"fonts": "dist/app/dist/fonts/",
+		"libs": "dist/app/dist/libs/",
+		"data": "dist/app/dist/data/",
+		"other": "dist/app/dist/"
+	},
+	"source": {
+		"pug": "src/theme/source/pug/*.pug",
+		"js": "src/theme/source/js/**/*.js",
+		"less": "src/theme/source/less/",
+		"img": "src/theme/source/img/**/*.*",
+		"fonts": "src/theme/source/fonts/**/*.*",
+		"libs": "src/theme/source/libs/**/*.*",
+		"data": "src/theme/source/data/**/*.*",
+		"other": "src/theme/source/*.*"
+	},
+	"watch": {
+		"pug": "src/theme/source/pug/**/*.*",
+		"js": "src/theme/source/js/**/*.js",
+		"less": "src/theme/source/less/**/*.*",
+		"img": "src/theme/source/img/**/*.*",
+		"fonts": "src/theme/source/fonts/**/*.*",
+		"libs": "src/theme/source/libs/**/*.*",
+		"data": "src/theme/source/data/**/*.*",
+		"other": "src/theme/source/*.*"
+	}
+}

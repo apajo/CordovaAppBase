@@ -1,0 +1,32 @@
+{
+	"dist": {
+		"html": "dist/server/html/",
+		"js": "dist/server/js/",
+		"css": "dist/server/css/",
+		"img": "dist/server/img/",
+		"fonts": "dist/server/fonts/",
+		"libs": "dist/server/libs/",
+		"data": "dist/server/data/",
+		"other": "dist/server/"
+	},
+	"source": {
+		"pug": "src/server/html/**/*.pug",
+		"js": ["src/server/js/*/*.js", "src/server/js/**/*.js"],
+		"css": "src/server/css/*.css",
+		"img": "src/server/img/*.*",
+		"fonts": "src/server/fonts/**/*.*",
+		"libs": "src/server/libs/**/*.*",
+		"data": "src/server/data/**/*.*",
+		"other": "src/server/*.*asdf"
+	},
+	"watch": {
+		"pug": "src/server/html/**/*.pug",
+		"js": ["src/server/js/*/*.js", "src/server/js/**/*.js"],
+		"css": "src/server/css/*.css",
+		"img": "src/server/img/*.*",
+		"fonts": "src/server/fonts/**/*.*",
+		"libs": "src/server/libs/**/*.*",
+		"data": "src/server/data/**/*.*",
+		"other": "src/server/*.*asdf"
+	}
+}

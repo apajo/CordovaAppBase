@@ -40,7 +40,7 @@ vars:
 	export ORG_GRADLE_PROJECT_cdvMinSdkVersion=16
 
 
-public:
+run:
 	cordova serve 8888
 
 device:
