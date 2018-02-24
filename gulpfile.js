@@ -150,7 +150,7 @@ Task.add('libs:build', function() {
     return gulp.src(path.source.libs);
 });
 
-gulp.task('img:build', function () {
+Task.add('img:build', function() {
     return gulp.src(path.source.img)
             .pipe(imagemin({
                     progressive: true,
