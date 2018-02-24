@@ -1,0 +1,24 @@
+.container-fluid.half-padding
+    .template.template__blank
+        .row
+            .col-md-12
+                .panel.panel-danger
+                    .panel-heading
+                        h3.panel-title Sign in
+                    .panel-body
+                        .login
+                            form.login__form(action='index.html')
+                                .form-group
+                                    input.form-control(type='text', placeholder='Login')
+                                .form-group
+                                    input.form-control(type='password', placeholder='Password')
+                                .form-group.login__action
+                                    .checkbox.login__remember
+                                        input#chb1(type='checkbox')
+                                        label(for='chb1') Remember
+                                    .login__submit
+                                        button.btn.btn-default(type='submit') Sign in
+                                br
+                                #fb-login.btn.btn-primary.btn-block.btn-social.btn-facebook
+                                    span.fa.fa-facebook
+                                        span Sign in with Facebook

@@ -5,18 +5,32 @@ Core.extend("rooms", function (core) {
         context = $("#rooms");
 
         setInterval(parse, 30000);
-        parse();
+        setTimeout(parse, 100);
     };
 
     var add = function (room) {
-        var html = '<li class=""><a href="room.html" data-server="'+
-            room.data.address+'" data-type="room"><div class="nav-menu__ico"><i class="fa fa-fw fa-cube"></i></div><div class="nav-menu__text"><span>'+room.data.name+'</span></div></a></li>';
-        
-        context.append(html);
+        checkRoom(room.data.address, function () {
+            var html = '<li class=""><a href="room.html" data-server="'+
+                room.data.address+'" data-type="room"><div class="nav-menu__ico"><i class="fa fa-fw fa-cube"></i></div><div class="nav-menu__text"><span>'+room.data.name+'</span></div></a></li>';
+
+            context.append(html);
+        });
+    }
+
+    var checkRoom = function (address, callback) {
+        if (address) {
+            $.get("http://"+address, function () {
+                if (typeof callback === "function") {
+                    callback();
+                }
+            });
+        } else {
+            Core.warn("Room inst active: "+address);
+        }
     }
 
     var parse = function () {
-        Core.query("rooms", function (data) { 
+        Core.query("rooms", {}, function (data) { 
             context.empty();
 
             data.rooms.map(function (a) {

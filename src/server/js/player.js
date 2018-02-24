@@ -15,7 +15,7 @@ Core.extend("events", function (core) {
             $(document).on("click", "#fb-login", function (e) {
                 core.fb.login();
             });
-           
+            
 
             return true;
         };

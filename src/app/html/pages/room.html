@@ -1,0 +1,60 @@
+<div id="player">
+
+
+    <div class="col-md-6">
+
+            <div class="users-preview__cont">
+                <div class="users-preview__data">
+                  <div class="users-preview__photo">
+                    <div></div>
+                  </div>
+                  <div class="users-preview__info">
+                      <div class="users-preview__name" id="video-title">Kimberly Garza</div>
+                    <div class="users-preview__position" id="video-author">Customer</div>
+                <div class="form-group">
+                  <label class="control-label">Seek</label>
+                  <input data-action="seek" class="slider" type="range"  value="" data-type="single" data-from="100">
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Valume</label>
+                  <input data-action="volume" class="slider" type="range"  value="" data-type="single" data-from="100">
+                </div>
+                <div class="input-group input-group-lg">
+                  <button data-action="prev" type="button" class="btn btn-secondary"><i class="fa fa-fast-backward"></i></button>
+                  <button data-action="play" data-state="true" type="button" class="btn btn-secondary"><i class="fa fa-pause"></i><i data-state="triggered" class="fa fa-play"></i></button>
+                  <button data-action="next" type="button" class="btn btn-secondary"><i class="fa fa-fast-forward"></i></button>
+                </div>
+                <div class="input-group input-group-lg">
+                    <input id="add-input" type="text" class="form-control" placeholder="Enter a video or playlist URL" value="https://www.youtube.com/watch?v=JaAWdljhD5o&list=RDJaAWdljhD5o">
+                    <button data-action="open" type="button" class="btn btn-secondary"><i class="fa fa-plus"></i></button>
+                </div>
+                  </div>
+                </div>
+              </div>
+
+            
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('[data-action="volume"]').ionRangeSlider({
+        decorate_both: false,
+        min: 0,
+        max : 100,
+        step: 5,
+        onChange: function (data) {
+            $(document).trigger("app:change", {action:'volume', value:$('*[data-action="volume"]').val()});
+        }
+    });
+    $('[data-action="seek"]').ionRangeSlider({
+        decorate_both: false,
+        min: 0,
+        max : 1000,
+        step: 1,
+        onChange: function (data) {
+            $(document).trigger("app:change", {action:'seek', value:$('*[data-action="volume"]').val()});
+        }
+    });
+</script>

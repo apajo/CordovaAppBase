@@ -11,6 +11,7 @@
 	},
 	"source": {
 		"pug": "src/app/html/**/*.pug",
+		"html": "src/app/html/**/*.html",
 		"js": ["src/app/js/*/*.js", "src/app/js/**/*.js"],
 		"css": "src/app/css/*.css",
 		"img": "src/app/img/*.*",
@@ -21,6 +22,7 @@
 	},
 	"watch": {
 		"pug": "src/app/html/**/*.pug",
+		"html": "src/app/html/**/*.html",
 		"js": ["src/app/js/*/*.js", "src/app/js/**/*.js"],
 		"css": "src/app/css/*.css",
 		"img": "src/app/img/*.*",

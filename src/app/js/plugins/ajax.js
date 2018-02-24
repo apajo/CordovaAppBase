@@ -4,7 +4,7 @@
 Core.extend("query", function (core) {
 	var server = "ytrc.apajo.ee/app/user/?";
 
-	return function (object/* , action, data*/, success, failed) {
+	return function (object, data, success, failed) {
             var path = "http://"+server+
                             (typeof object === "string" ? object : "/" + object.join("/"));
 
@@ -20,7 +20,11 @@ Core.extend("query", function (core) {
                         },
                     success: function(data, status, xhr){
 
-                        try { success.apply(this, arguments); } catch (err) {}
+                        try {
+                            success.apply(this, arguments);
+                        } catch (err) {
+                            Core.error("ERROR: " + err.toString());
+                        }
                     },
                     error: failed
                 });

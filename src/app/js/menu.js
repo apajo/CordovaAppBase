@@ -8,7 +8,7 @@ Core.extend("menu", function (core) {
             context = $(".sidebar");
             container = $("#content-container");
             
-            Core.query("rooms", function (data) {
+            Core.query("rooms", {}, function (data) {
                 console.log(data);
             });
             

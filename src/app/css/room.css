@@ -1,0 +1,7 @@
+.users-preview__info {float: none; width: auto;}
+
+#player .form-group {
+    float: left;
+    width: 100%;
+    clear: both;
+}
