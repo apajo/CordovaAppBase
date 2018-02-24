@@ -1,18 +1,5 @@
-.modal {
-  text-align: center;
-  padding: 0!important;
-}
+.main {width: auto; padding:0; margin: 0;}
 
-.modal:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -4px; /* Adjusts for spacing */
-}
-
-.modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
-}
+.header-navbar .topnavbar {padding:0; margin: 0;}
+.header-navbar .topnavbar,.header-navbar {min-height: initial}
+.dashboard {border-top: 35px solid transparent;}

@@ -9,7 +9,7 @@ var Core = (function($){
         
         if (initState) {return false;}
 
-        $(document).one("unload", end);
+        //$(document).one("app:unload", end);
         initState = true;
 
         start();
@@ -130,7 +130,7 @@ var Core = (function($){
 	var end = function (e) {
 		stop();
 
-		$(document).trigger("unload");
+		$(document).trigger("app:unload");
         
 		if (core.isApp()) {
 			navigator.app.exitApp();

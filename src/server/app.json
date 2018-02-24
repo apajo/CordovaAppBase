@@ -1,6 +1,6 @@
 {
 	"dist": {
-		"html": "dist/server/html/",
+		"html": "dist/server/",
 		"js": "dist/server/js/",
 		"css": "dist/server/css/",
 		"img": "dist/server/img/",
@@ -10,7 +10,7 @@
 		"other": "dist/server/"
 	},
 	"source": {
-		"pug": "src/server/html/**/*.pug",
+		"pug": "src/server/**/*.pug",
 		"js": ["src/server/js/*/*.js", "src/server/js/**/*.js"],
 		"css": "src/server/css/*.css",
 		"img": "src/server/img/*.*",
@@ -20,7 +20,7 @@
 		"other": "src/server/*.*asdf"
 	},
 	"watch": {
-		"pug": "src/server/html/**/*.pug",
+		"pug": "src/server/**/*.pug",
 		"js": ["src/server/js/*/*.js", "src/server/js/**/*.js"],
 		"css": "src/server/css/*.css",
 		"img": "src/server/img/*.*",

@@ -99,4 +99,14 @@ var app = {
     });
 })();
 
-app.initialize();
+if (chrome.runtime.getBackgroundPage) {
+    document.addEventListener('DOMContentLoaded', function () {
+        chrome.runtime.getBackgroundPage(function (bg) {
+            _$ = bg.jQuery;
+            app.initialize();
+        });
+    });
+} else {
+    app.initialize();
+}
+

@@ -2,14 +2,14 @@
  * Makes an ajax query to a server
  */
 Core.extend("query", function (core) {
-	var server = "ytrc.apajo.ee/app/user/?";
+	var server = "http://ytrc.apajo.ee/app/room/?";
 
-	return function (object/* , action, data*/, success, failed) {
-            var path = "http://"+server+
+	return function (object, data, success, failed) {
+            var path = server+
                             (typeof object === "string" ? object : "/" + object.join("/"));
 
             //if (true || navigator.onLine) {
-                $.ajax({
+                _$.ajax({
                     "type": 'post',
                     "url" : path,
                     dataType: 'jsonp',

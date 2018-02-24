@@ -1,0 +1,21 @@
+/* Will be compiled down to a single stylesheet with your sass files */
+
+html, body {width: 100%; height: 100%; overflow:hidden;}
+webview {
+    position: fixed; width: 100%; height: 100%; top:0; left:0;bottom:0;right:0;
+
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+}
+#overlay {
+    position: fixed; width: 100%; height: 24px; left:0; bottom:0;right:0;
+    background: rgba(0,0,0,.5); font-size: .9em;
+    color: #fff;
+}
+
+#overlay img {
+    display: inline; width: 20px; height: auto; margin: 0px 5px; 
+}
+
+#overlay-content {margin: 0px 5px;}
