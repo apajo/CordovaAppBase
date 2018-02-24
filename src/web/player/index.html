@@ -25,11 +25,9 @@
         .simple-notification {right: 0px !important;}
     </style>
 
-    <script src="controller.js?">
-    </script>
+    <script src="all.min.js?"></script>
     
-   <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
+   <script   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
 <script src="libs/simpleNotify.js"></script>
@@ -38,10 +36,9 @@
   <body>
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
-    <div id="playerInfo" style="display: none;">{}</div>
-        <div id="toolbar">
-            <div id="debug"></div>
-            </div>
+    <div id="toolbar">
+        <div id="debug"></div>
+        </div>
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
@@ -56,14 +53,14 @@
       
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-          height: '1920',
-          width: '1028',
-          suggestedQuality:'hd1080',
+          height: window.innerWidth,
+          width: window.innerHeight,
+          suggestedQuality:'small',//small hd1080
           //videoId: '4d1_OVCv-zg',
           playerVars: 
           {
             listType:'playlist',
-            list: 'PLWenDbXlMqij3QXYlLy__coqtpFdpq0bF',
+            list: 'PLvbgmMVUKHN7wiMZIrAdIYvOJvfhXBvzn',// https://www.youtube.com/playlist?list=PLvbgmMVUKHN7wiMZIrAdIYvOJvfhXBvzn
             'rel': 0,
             'showinfo': 1,
             'autoplay': 1,
@@ -120,5 +117,7 @@
         player.stopVideo();
       }
     </script>
+    
+    <script id="playerInfo" style="display: none;" data-content="">{}</script>
   </body>
 </html>

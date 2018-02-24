@@ -30,7 +30,7 @@ class AppServer
                 break;
             default:
                 $rooms = array_filter($this->session->getSessions(), function ($a) use ($ip) {
-                    return $a['public_ip'] == $ip && $a['type'] == 'room';
+                    return true;//$a['public_ip'] == $ip && $a['type'] == 'room';
                 });
                 $this->output(['rooms'=>array_values($rooms)]);
         }
@@ -41,7 +41,7 @@ class AppServer
     protected function output ($data) {
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-        header('Content-type: application/json');
+        
 
         if ($this->debug) {
             $data['debug'] = [
@@ -50,7 +50,13 @@ class AppServer
             ];
         }
 
-        die( @$_GET['callback'] . '(' . json_encode((array)$data, JSON_PRETTY_PRINT) . ')');
+        if (isset($_GET['callback'])) {
+            header('Content-type: application/json');
+            die( $_GET['callback'] . '(' . json_encode((array)$data, JSON_PRETTY_PRINT) . ')');
+        } else {
+            header('Content-type: text/javascript');
+            die( json_encode((array)$data, JSON_PRETTY_PRINT));
+        }
     }
     
     protected function sess () {
@@ -67,8 +73,7 @@ class AppServer
             case AppServer::TYPE_ROOM:
                 $_SESSION['data'] = [
                     'name' => htmlspecialchars($_POST['name'] ?? $_POST['address'] ?? $_SESSION['public_ip']),
-                    'address' => filter_var ($_POST['address'] ?? $_SESSION['public_ip'], FILTER_SANITIZE_URL).
-                            ':'.intval($_POST['port'] ?? 8080)
+                    'address' => filter_var ($_POST['address'] ?? $_SESSION['public_ip'], FILTER_SANITIZE_URL)
                 ];
                 break;
             default:

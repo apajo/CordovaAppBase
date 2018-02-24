@@ -17,8 +17,7 @@
 		"img": "src/app/img/*.*",
 		"fonts": "src/app/fonts/**/*.*",
 		"libs": "src/app/libs/**/*.*",
-		"data": "src/app/data/**/*.*",
-		"other": "src/app/*.*asdf"
+		"data": "src/app/data/**/*.*"
 	},
 	"watch": {
 		"pug": "src/app/html/**/*.pug",
@@ -28,7 +27,6 @@
 		"img": "src/app/img/*.*",
 		"fonts": "src/app/fonts/**/*.*",
 		"libs": "src/app/libs/**/*.*",
-		"data": "src/app/data/**/*.*",
-		"other": "src/app/*.*asdf"
+		"data": "src/app/data/**/*.*"
 	}
 }

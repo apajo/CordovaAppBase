@@ -50,7 +50,9 @@ var pl = (function () {
                             player.loadPlaylist({
                                 listType: data.type,
                                 list: data.id,
-                                'suggestedQuality' : 'hd1080',
+                                    height: window.innerWidth,
+                                    width: window.innerHeight,
+                                    suggestedQuality:'small',//small hd1080
                                 shuffle : true,
                                 autoplay: true,
                                 startOpened : false,
@@ -105,7 +107,7 @@ var pl = (function () {
                 }
                 break;
             case 'seek':
-                var percent = Math.min(Math.max(parseFloat(data) / 1000, 0), 1);
+                var percent = Math.min(Math.max(parseFloat(data) / 100, 0), 1);
                 
                 message('Seeking to ' + parseInt(percent * 100) + '%');
 
@@ -174,7 +176,13 @@ var pl = (function () {
     };
 
     var updateInfo = function () {
-        document.getElementById("playerInfo").innerHTML=JSON.stringify(getInfo());
+        var info = getInfo();
+        document.getElementById("playerInfo").innerHTML=JSON.stringify(info);
+        populateInfo(info);
+    }
+
+    var populateInfo = function (info) {
+        console.log(info);
     }
 
     var debug = function (txt) {

@@ -12,7 +12,7 @@ Core.extend("room", function (core) {
                 console.log("room open", d[0].text);
                 exec('open', d[0].text);
             }
-        });;
+        });
         
         $(document).on("app:page:load", function (e, params) {
             if (params.href == "room.html") {
@@ -30,10 +30,8 @@ Core.extend("room", function (core) {
 
             switch (action) {
                 case 'volume':
-                    exec('volume', value);
-                    break;
                 case 'seek':
-                    exec('seek', value);
+                    exec(action, value);
                     break;
             }
         });
@@ -147,7 +145,7 @@ Core.extend("room", function (core) {
                     var percent = data.time / data.duration,
                         elem = $('[data-action="seek"]');
                     
-                    percent = parseInt(Math.max(Math.min(percent, 1), 0) * 1000);
+                    percent = parseInt(Math.max(Math.min(percent, 1), 0) * 100);
 
                     var slider = elem.data("ionRangeSlider");
 
