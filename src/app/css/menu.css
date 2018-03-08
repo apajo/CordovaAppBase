@@ -1,0 +1,1 @@
+.sidebar #rooms li:gt(n+1).none {display: none}

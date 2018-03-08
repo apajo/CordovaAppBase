@@ -1,5 +1,6 @@
 Core.extend("rooms", function (core) {
-    var context = null;
+    var context = null,
+        rooms = [];
           
     var init = function () {
         context = $("#rooms");
@@ -13,7 +14,13 @@ Core.extend("rooms", function (core) {
             var html = '<li class=""><a href="room.html" data-server="'+
                 room.data.address+'" data-type="room"><div class="nav-menu__ico"><i class="fa fa-fw fa-cube"></i></div><div class="nav-menu__text"><span>'+room.data.name+'</span></div></a></li>';
 
-            context.append(html);
+            context.prepend(html);
+            rooms.push(room);
+            
+            if (!core.room.getAddress()) {
+                console.log("default room", room.data.address);
+                core.menu.select(context.find('[data-server="'+room.data.address+'"]'));
+            }
         });
     }
 
@@ -31,8 +38,9 @@ Core.extend("rooms", function (core) {
 
     var parse = function () {
         Core.query("rooms", {}, function (data) { 
-            context.empty();
-
+            context.find("li:not(.none)").remove();
+            rooms = [];
+            
             data.rooms.map(function (a) {
                 add(a);
             });

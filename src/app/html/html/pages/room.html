@@ -1,0 +1,88 @@
+<div id="player">
+
+
+    <div class="col-md-6">
+
+            <div class="users-preview__cont">
+                <div class="users-preview__data">
+                  <div class="users-preview__photo">
+                    <div></div>
+                  </div>
+                  <div class="users-preview__info">
+                      <!-- <div class="users-preview__name" id="video-title"></div> -->
+                    <div class="users-preview__position" id="video-title"></div>
+                    
+                    <div class="form-group">
+                      <input data-action="seek" class="slider" type="range"  value="0" data-type="single"
+                                data-from="0" data-min="0"   min="0" max="99999">
+                    </div>
+                  </div>
+                
+                    <div class="form-group">
+                        <div class="input-group input-group-lg buttonbar">
+                          <button data-action="prev" type="button" class="btn btn-lg btn-secondary"><i class="fa fa-fast-backward"></i></button>
+                          <button data-action="play" data-state="true" type="button" class="btn btn-lg btn-secondary"><i class="fa fa-pause"></i><i data-state="triggered" class="fa fa-play"></i></button>
+                          <button data-action="next" type="button" class="btn btn-lg btn-secondary"><i class="fa fa-fast-forward"></i></button>
+                        </div>
+                    </div>
+                               
+                    <div class="form-group volumebar">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button data-action="mute" class="btn btn-lg btn-default" type="button">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </span>
+                            <span class="input-group-addon" id="basic-addon2">
+                                <input data-action="volume" class="slider form-control input-lg" type="range"  value="100" data-type="single"
+                                    data-from="100" data-min="0" data-max="100">
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input id="add-input" class="form-control input-lg" type="text" placeholder="Enter a video or playlist URL" value="">
+                            <span class="input-group-btn">
+                                <button data-action="open" class="btn btn-lg btn-default" type="button">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+              </div>
+        </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('[data-action="volume"]').ionRangeSlider({
+        decorate_both: false,
+        min: 0,
+        max : 100,
+        step: 5,
+        hide_min_max: true,
+        hide_from_to: true,
+        grid: false,
+        onChange: function (data) {
+            $(document).trigger("app:change", {action:'volume', value:$('[data-action="volume"]').val()});
+        }
+    });
+    $('[data-action="seek"]').ionRangeSlider({
+        decorate_both: false,
+        min: 0,
+        step: 1,
+        hide_min_max: false,
+        grid: false,
+        onChange: function (data) {
+            console.log(data);
+            $(document).trigger("app:change", {action:'seek', value:$('[data-action="seek"]').val()});
+        },
+        prettify: function (num) {
+            return Core.utils.timestamp.toTime(num);
+        }
+    });
+</script>

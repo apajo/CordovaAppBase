@@ -8,26 +8,26 @@ Core.extend("menu", function (core) {
             context = $(".sidebar");
             container = $("#content-container");
             
-            Core.query("rooms", {}, function (data) {
-                console.log(data);
-            });
-            
             context.on("click", "li a", function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                
-                var href = $(this).attr("href"),
-                    target = $(this).attr("data-type");
-                
-                if (href) {
-                    activateLink($(this));
-                }
-                
-                load(href, target, $(this));
-                
-                return false;
+
+                select($(this));
             });
         };
+        
+        var select = function  (elem) {
+            var href = elem.attr("href"),
+                target = elem.attr("data-type");
+
+            if (href) {
+                activateLink(elem);
+            }
+
+            load(href, target, elem);
+
+            return false;
+        }
         
         var load = function (href, target, elem) {
             $(document).trigger("app:page:unload", lastHref);
@@ -63,7 +63,7 @@ Core.extend("menu", function (core) {
         
 	return {
             init : init,
-            
+            select : select
         };
 });
 

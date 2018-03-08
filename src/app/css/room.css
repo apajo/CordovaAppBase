@@ -5,3 +5,16 @@
     width: 100%;
     clear: both;
 }
+
+.buttonbar {
+    width: 12em;
+    margin: 0 auto;
+}
+#player .volumebar .irs {height: 0; margin-top: -27px;
+    padding-left: 5px;     padding-right: 5px;}
+
+#player .form-group {
+    margin-bottom: 20px;
+}
+
+#player .input-group-addon {padding-left: 12px; padding-right: 12px;}

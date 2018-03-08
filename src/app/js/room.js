@@ -1,27 +1,28 @@
 Core.extend("room", function (core) {
     var context = null,
-        address = null,
-        data = {};
+        address = false,
+        data = {},
+        interval = null;
         
     var init = function () {
         context = $("#room");
         
-        Core.intent.addListener("text/plain", function (d) {
-            console.log("room intent", d);
-            if (d.length > 0) {
-                console.log("room open", d[0].text);
-                exec('open', d[0].text);
-            }
-        });
+
         
         $(document).on("app:page:load", function (e, params) {
             if (params.href == "room.html") {
                 var server = params.data["data-server"];
-
-                address = server;
-                setInterval(getServerState, 5000);
-                getServerState();
+                selectRoom(server);
             }
+            
+            Core.intent.addListener("text/plain", function (d) {
+                console.log("intent", d);
+                if (d.length > 0) {
+                    exec('open', d[0].text);
+                }
+
+                return true;
+            });
         });
         
         $(document).on("app:change", function (e, data){
@@ -38,9 +39,7 @@ Core.extend("room", function (core) {
         
         $(document).on("click", "*[data-action]", function (e){
             var action = $(this).attr('data-action');
-            
-            console.log(action, this);
-            
+
             switch (action) {
                 case 'open':
                     exec('open', $("#add-input").val());
@@ -142,15 +141,29 @@ Core.extend("room", function (core) {
                     });
                     break;
                 case 'time':
-                    var percent = data.time / data.duration,
-                        elem = $('[data-action="seek"]');
-                    
-                    percent = parseInt(Math.max(Math.min(percent, 1), 0) * 100);
+                    var elem = $('[data-action="seek"]');
 
-                    var slider = elem.data("ionRangeSlider");
+                    //elem.data("ionRangeSlider").destroy();
+                    elem.ionRangeSlider({
+                        type: "single",
+                        min:0,
+                        max:data.duration,
+                        from:data.time,
+                        grid: false,
+                        step:1,
+                        onChange: function (data) {
+                            $(document).trigger("app:change", {action:'seek', value:$('[data-action="seek"]').val()});
+                        },
+                        prettify: function (num) {
+                            return parseInt(num) + "s";
+                        }
+                    });
 
-                    slider.update({
-                        from:percent
+                    elem.data("ionRangeSlider").update({
+                        min:0,
+                        max:data.duration,
+                        from:data.time,
+                        step:1
                     });
                     break;
                 case 'playlist':
@@ -198,7 +211,19 @@ Core.extend("room", function (core) {
         };
     }
 
+    var getAddress = function ( ) {
+        return address;
+    }
+
+    var selectRoom = function (server) {
+        address = server;
+        interval = setInterval(getServerState, 5000);
+        getServerState();
+    }
+    
     return {
-        init : init
+        init : init,
+        getAddress : getAddress,
+        select : selectRoom
     };
 });

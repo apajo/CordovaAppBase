@@ -1,0 +1,42 @@
+{
+	"dist": {
+		"html": "dist/app/",
+		"js": "dist/app/js/",
+		"css": "dist/app/css/",
+		"img": "dist/app/img/",
+		"fonts": "dist/app/fonts/",
+		"libs": "dist/app/libs/",
+		"data": "dist/app/data/",
+		"other": "dist/app/"
+	},
+	"source": {
+		"pug": "src/app/html/**/*.pug",
+		"html": "src/app/html/**/*.html",
+		"js": [
+                    "src/frame/core/*.js",
+                    "src/frame/plugins/*.js",
+                    "src/app/js/plugins/*.js",
+                    "src/app/js/**/*.js"
+                ],
+		"css": "src/app/css/*.css",
+		"img": "src/app/img/*.*",
+		"fonts": "src/app/fonts/**/*.*",
+		"libs": "src/app/libs/**/*.*",
+		"data": "src/app/data/**/*.*"
+	},
+	"watch": {
+		"pug": "src/app/html/**/*.pug",
+		"html": "src/app/html/**/*.html",
+		"js": [
+                    "src/frame/core/*.js",
+                    "src/frame/plugins/*.js",
+                    "src/app/js/plugins/*.js",
+                    "src/app/js/**/*.js"
+                ],
+		"css": "src/app/css/*.css",
+		"img": "src/app/img/*.*",
+		"fonts": "src/app/fonts/**/*.*",
+		"libs": "src/app/libs/**/*.*",
+		"data": "src/app/data/**/*.*"
+	}
+}

@@ -1,0 +1,57 @@
+.sidebar.accelerate
+    .scrollable.scrollbar-macosx
+        .sidebar__cont
+            .sidebar__menu
+                ul.nav.nav-menu
+                    li.active
+                        a(href="login.html")
+                            .nav-menu__ico
+                                i.fa.fa-fw.fa-user
+                            .nav-menu__text
+                                span Login
+                .sidebar__title Rooms
+                ul#rooms.nav.nav-menu
+                    li.disabled.none
+                        a
+                            .nav-menu__ico
+                                i.fa.fa-fw.fa-delete
+                            .nav-menu__text
+                                span No rooms found
+
+                .sidebar__title Settings
+                .ss-widget
+                    .ss-widget__cont
+                        .ss-widget__row
+                            .ss-widget__cell Site
+                            .ss-widget__cell
+                                input.bs-switch(type='checkbox', checked='checked', data-size="micro", data-on-color="success", data-off-color="danger")
+                        .ss-widget__row
+                            .ss-widget__cell Mailing
+                            .ss-widget__cell
+                                input.bs-switch(type='checkbox', data-size="micro", data-on-color="success", data-off-color="danger")
+                        .ss-widget__item
+                            .ss-widget__label Limit
+                            .ss-widget__value
+                                input.settings-slider(type="text", name="", value="", data-grid="false", data-min='0', data-max='2000', data-from='600', data-step='200')
+                        .ss-widget__row
+                            .ss-widget__cell Timeout
+                            .ss-widget__cell
+                                input.form-control.input-sm(type='number', min="5", max='50', step="5", value='15')
+                .sidestat
+                    .sidestat__cont
+                        .sidestat__item
+                            .sidestat__value 1,760
+                            .sidestat__text visits of your site
+                            .sidestat__chart.sparkline.bar 1699,1686,8368,9011,6129,3837,0997,2034,0483,1457,2950,8946,0866,6247,8222,5727,0020,6883,3410,5224,2034,0483,1457,2950,5946,0866
+                        .sidestat__item
+                            .sidestat__value 2,034
+                            .sidestat__text views of your products
+                            .sidestat__chart.sparkline.area 5696,6514,9647,6326,6028,8869,8251,9146,6137,8997,6892,9544,7011,6556,7737,8348,7011,6558,7556
+                        .sidestat__item
+                            .sidestat__value $2,950
+                            .sidestat__text average day earning
+                            .sidestat__chart.sparkline.bar_thin 6658,8005,9033,8360,3385,9018,9089,7804,5574,7556,6910,4327,7500,6563,0649,2584,8757,6815,8368,9011,6129,3837,0997,2034,0483,1457,2950,8946,0866,6247,3385,9018,9089,7804,5574,7556,6910,4327,7500,7804,5574,7556,6910,4327,7500,6563,0649,2584
+                        .sidestat__item
+                            .sidestat__value 290
+                            .sidestat__text month orders
+                            .sidestat__chart.sparkline.line 075,487,581,520,075,630,350,631,794,666,466,322,833,471,721,703,042,328,844,996,099,342,841,599
